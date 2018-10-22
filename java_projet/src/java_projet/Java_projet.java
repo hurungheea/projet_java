@@ -5,8 +5,10 @@
  */
 package java_projet;
 
+import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -15,16 +17,24 @@ import javafx.stage.Stage;
  *
  * @author achantelou
  */
-public class Java_projet extends Application {
+public class Java_projet extends Application 
+{
+    public static Stage stage;
+    public static Parent page;
+    public static Scene scene;
+    
+    public Java_projet()
+    {
+        stage = new Stage();
+    }
     
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) throws Exception
+    {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
-        
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
-        stage.show();
+        this.scene = new Scene(root);
+        this.stage.setScene(scene);
+        this.stage.show();
     }
 
     /**
@@ -34,5 +44,4 @@ public class Java_projet extends Application {
     {
         launch(args);
     }
-    
 }
