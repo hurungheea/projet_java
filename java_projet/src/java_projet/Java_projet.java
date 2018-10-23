@@ -23,16 +23,17 @@ import com.pauware.pauware_engine._Exception.Statechart_exception;
  */
 public class Java_projet extends Application 
 {
-    public BCMS _bcms;
+    private static BCMS bcms;
     
-    public static Stage stage;
-    public static Parent page;
-    public static Scene scene;
+    private static Stage stage;
+    private static Parent page;
+    private static Scene scene;
     
     public Java_projet() throws Statechart_exception
     {
         stage = new Stage();
-        _bcms = new BCMS();
+        bcms = new BCMS();
+        bcms.start();
     }
     
     /**
@@ -71,5 +72,10 @@ public class Java_projet extends Application
         
         Java_projet.stage.setScene(Java_projet.scene);
         Java_projet.stage.show();
+    }
+    
+    public static final BCMS getBcms()
+    {
+        return Java_projet.bcms;
     }
 }

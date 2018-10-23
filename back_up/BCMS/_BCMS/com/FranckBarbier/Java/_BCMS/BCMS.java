@@ -18,8 +18,8 @@ final class Timeout_log {
     }
 }
 
-public class BCMS extends Timer_monitor {
-
+public class BCMS extends Timer_monitor
+{
     private java.util.LinkedList<Timeout_log> _timeout_log;
     // SCXML DATAMODEL
     private final long _negotiation_limit = 180000L; // 3 min.

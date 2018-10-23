@@ -9,6 +9,8 @@ package java_projet;
  */
 
 
+import com.FranckBarbier.Java._BCMS.BCMS;
+import com.pauware.pauware_engine._Exception.Statechart_exception;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,13 +24,20 @@ import javafx.scene.input.MouseEvent;
  *
  * @author ashx
  */
-public class ConnectionPageController implements Initializable {
+public class ConnectionPageController implements Initializable
+{
+    private BCMS bcms;
 
     @FXML
     private Button copsBtn;
     @FXML
     private Button fmBtn;
 
+    public ConnectionPageController()
+    {
+        this.bcms = Java_projet.getBcms();
+    }
+    
     /**
      * Initializes the controller class.
      */
@@ -39,15 +48,17 @@ public class ConnectionPageController implements Initializable {
     }    
 
     @FXML
-    private void copConnection(MouseEvent event) throws IOException
+    private void copConnection(MouseEvent event) throws IOException, Statechart_exception
     {
         Java_projet.changeScene("policeman.fxml");
+        this.bcms.PSC_connection_request();
     }
 
     @FXML
-    private void fireConnection(MouseEvent event) throws IOException
+    private void fireConnection(MouseEvent event) throws IOException, Statechart_exception
     {
         Java_projet.changeScene("fireman.fxml");
+        this.bcms.FSC_connection_request();
     }
     
 }
