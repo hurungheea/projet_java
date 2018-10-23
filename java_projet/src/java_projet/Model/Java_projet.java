@@ -1,14 +1,15 @@
+package java_projet.Model;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java_projet;
+
 
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.JavaFXBuilderFactory;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -28,10 +29,14 @@ public class Java_projet extends Application
         stage = new Stage();
     }
     
+    /**
+     * @param stage
+     * @throws Exception 
+     */
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLDocument.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("java_projet.View.connectionPage.fxml"));
         this.scene = new Scene(root);
         this.stage.setScene(scene);
         this.stage.show();
@@ -43,5 +48,19 @@ public class Java_projet extends Application
     public static void main(String[] args)
     {
         launch(args);
+    }
+    
+    /**
+     * @param fxml
+     * @throws IOException 
+     */
+    public static final void changeScene(String fxml) throws IOException
+    {
+        Java_projet.page = (Parent) FXMLLoader.load(Java_projet.class.getResource("java_projet.View.two.fxml"));
+        Java_projet.scene = Java_projet.stage.getScene();
+        
+        Java_projet.scene = new Scene(Java_projet.page,700,420);
+        Java_projet.stage.setScene(Java_projet.scene);
+        Java_projet.stage.show();
     }
 }
