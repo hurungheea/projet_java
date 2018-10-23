@@ -15,20 +15,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
+import com.FranckBarbier.Java._BCMS.BCMS;
+import com.pauware.pauware_engine._Exception.Statechart_exception;
 /**
  *
  * @author achantelou
  */
 public class Java_projet extends Application 
 {
+    public BCMS _bcms;
+    
     public static Stage stage;
     public static Parent page;
     public static Scene scene;
     
-    public Java_projet()
+    public Java_projet() throws Statechart_exception
     {
         stage = new Stage();
+        _bcms = new BCMS();
     }
     
     /**

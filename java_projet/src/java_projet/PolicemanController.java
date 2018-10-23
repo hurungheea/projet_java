@@ -5,9 +5,13 @@
  */
 package java_projet;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.input.MouseEvent;
 
 /**
  * FXML Controller class
@@ -17,6 +21,9 @@ import javafx.fxml.Initializable;
 public class PolicemanController implements Initializable
 {
 
+    @FXML
+    private Button copsBtn;
+
     /**
      * Initializes the controller class.
      */
@@ -25,5 +32,11 @@ public class PolicemanController implements Initializable
     {
         // TODO
     }    
+
+    @FXML
+    private void backHome(MouseEvent event) throws IOException
+    {
+        Java_projet.changeScene("connectionPage.fxml");
+    }
     
 }
