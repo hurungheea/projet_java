@@ -1,4 +1,6 @@
-package java_projet.Model;
+package java_projet;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -36,8 +38,9 @@ public class Java_projet extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("java_projet.View.connectionPage.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("connectionPage.fxml"));
         this.scene = new Scene(root);
+        this.scene.getStylesheets().add(Java_projet.class.getResource("style.css").toExternalForm());
         this.stage.setScene(scene);
         this.stage.show();
     }
@@ -56,10 +59,12 @@ public class Java_projet extends Application
      */
     public static final void changeScene(String fxml) throws IOException
     {
-        Java_projet.page = (Parent) FXMLLoader.load(Java_projet.class.getResource("java_projet.View.two.fxml"));
-        Java_projet.scene = Java_projet.stage.getScene();
+        Java_projet.page = (Parent) FXMLLoader.load(Java_projet.class.getResource(fxml));
         
+        Java_projet.scene = Java_projet.stage.getScene();
         Java_projet.scene = new Scene(Java_projet.page,700,420);
+        Java_projet.scene.getStylesheets().add(Java_projet.class.getResource("style.css").toExternalForm());
+        
         Java_projet.stage.setScene(Java_projet.scene);
         Java_projet.stage.show();
     }

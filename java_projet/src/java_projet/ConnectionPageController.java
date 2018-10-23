@@ -1,4 +1,6 @@
-package java_projet.Controller;
+package java_projet;
+
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -7,6 +9,7 @@ package java_projet.Controller;
  */
 
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
@@ -36,15 +39,15 @@ public class ConnectionPageController implements Initializable {
     }    
 
     @FXML
-    private void copConnection(MouseEvent event)
+    private void copConnection(MouseEvent event) throws IOException
     {
-        System.out.println("i'm a policeman");
+        Java_projet.changeScene("policeman.fxml");
     }
 
     @FXML
-    private void fireConnection(MouseEvent event)
+    private void fireConnection(MouseEvent event) throws IOException
     {
-        System.out.println("i'm a fireman");
+        Java_projet.changeScene("fireman.fxml");
     }
     
 }

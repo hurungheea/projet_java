@@ -6,8 +6,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="java_projet.Controller.ConnectionPageController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="java_projet.ConnectionPageController">
   <children>
+    <Label text="Are you a FIREMAN or a POLICEMAN" />
     <Button fx:id="copsBtn" layoutX="79.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#copConnection" prefHeight="76.0" prefWidth="178.0" text="Policemen" />
     <Button fx:id="fmBtn" layoutX="368.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#fireConnection" prefHeight="76.0" prefWidth="178.0" text="Fireman" />
   </children>
