@@ -700,9 +700,11 @@ public class BCMS extends Timer_monitor
             final BCMS bCMS = new BCMS();
             bCMS.start();
 
-            bCMS.FSC_connection_request();
-            bCMS.PSC_connection_request();
-            bCMS.state_fire_truck_number(2);
+
+//            bCMS.FSC_connection_request();
+//            bCMS.PSC_connection_request();
+
+//            bCMS.state_fire_truck_number(2);
             bCMS.state_police_vehicle_number(2);
 
             bCMS.route_for_police_vehicles();
@@ -712,12 +714,12 @@ public class BCMS extends Timer_monitor
              * 'route_for_police_vehicles' that is re-sent internally, arrives
              * before what follows:
              */
-            bCMS.route_for_fire_trucks();
-            bCMS.FSC_disagrees_about_fire_truck_route();
-            bCMS.route_for_fire_trucks();
+//            bCMS.route_for_fire_trucks();
+//            bCMS.FSC_disagrees_about_fire_truck_route();
+//            bCMS.route_for_fire_trucks();
             bCMS.FSC_agrees_about_police_vehicle_route();
-            bCMS.FSC_agrees_about_fire_truck_route();
-            Thread.sleep(100);
+//            bCMS.FSC_agrees_about_fire_truck_route();
+//            Thread.sleep(100);
             /**
              * Bug due to PlantUML modeling style. One must await so that
              * 'completion' that is sent internally, arrives before what

@@ -5,6 +5,7 @@
  */
 package java_projet;
 
+import com.FranckBarbier.Java._BCMS.BCMS;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -20,9 +21,13 @@ import javafx.scene.input.MouseEvent;
  */
 public class PolicemanController implements Initializable
 {
+    private BCMS bcms;
+    
+    public PolicemanController()
+    {
+        this.bcms = Java_projet.getBcms();
+    }
 
-    @FXML
-    private Button copsBtn;
 
     /**
      * Initializes the controller class.
@@ -38,5 +43,4 @@ public class PolicemanController implements Initializable
     {
         Java_projet.changeScene("connectionPage.fxml");
     }
-    
 }

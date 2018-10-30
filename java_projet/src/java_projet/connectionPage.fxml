@@ -11,5 +11,6 @@
     <Label text="Are you a FIREMAN or a POLICEMAN" />
     <Button fx:id="copsBtn" layoutX="79.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#copConnection" prefHeight="76.0" prefWidth="178.0" text="Policemen" />
     <Button fx:id="fmBtn" layoutX="368.0" layoutY="174.0" mnemonicParsing="false" onMouseClicked="#fireConnection" prefHeight="76.0" prefWidth="178.0" text="Fireman" />
+    <Button layoutX="267.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#quitApp" text="Quitter" />
   </children>
 </AnchorPane>

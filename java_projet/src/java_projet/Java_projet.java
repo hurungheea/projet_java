@@ -1,13 +1,10 @@
 package java_projet;
 
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 
 import java.io.IOException;
 import javafx.application.Application;
@@ -17,10 +14,12 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import com.FranckBarbier.Java._BCMS.BCMS;
 import com.pauware.pauware_engine._Exception.Statechart_exception;
+
 /**
  *
  * @author achantelou
  */
+
 public class Java_projet extends Application 
 {
     private static BCMS bcms;
@@ -44,10 +43,10 @@ public class Java_projet extends Application
     public void start(Stage stage) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("connectionPage.fxml"));
-        this.scene = new Scene(root);
-        this.scene.getStylesheets().add(Java_projet.class.getResource("style.css").toExternalForm());
-        this.stage.setScene(scene);
-        this.stage.show();
+        Java_projet.scene = new Scene(root);
+        Java_projet.scene.getStylesheets().add(Java_projet.class.getResource("style.css").toExternalForm());
+        Java_projet.stage.setScene(scene);
+        Java_projet.stage.show();
     }
 
     /**
@@ -77,5 +76,10 @@ public class Java_projet extends Application
     public static final BCMS getBcms()
     {
         return Java_projet.bcms;
+    }
+    
+    public static final void quit()
+    {
+        System.exit(0);
     }
 }

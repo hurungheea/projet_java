@@ -60,5 +60,11 @@ public class ConnectionPageController implements Initializable
         Java_projet.changeScene("fireman.fxml");
         this.bcms.FSC_connection_request();
     }
+
+    @FXML
+    private void quitApp(MouseEvent event)
+    {
+        System.exit(0);
+    }
     
 }
