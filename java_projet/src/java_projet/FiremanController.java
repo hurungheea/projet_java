@@ -29,7 +29,6 @@ import javafx.scene.layout.Border;
 public class FiremanController implements Initializable
 {
     private BCMS bcms;
-
     @FXML
     private Button backBtn;
     @FXML

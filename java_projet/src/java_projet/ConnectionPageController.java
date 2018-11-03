@@ -1,13 +1,10 @@
 package java_projet;
 
-
-
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 
 import com.FranckBarbier.Java._BCMS.BCMS;
 import com.pauware.pauware_engine._Exception.Statechart_exception;
@@ -64,7 +61,7 @@ public class ConnectionPageController implements Initializable
     @FXML
     private void quitApp(MouseEvent event)
     {
-        System.exit(0);
+        Java_projet.quit();
     }
     
 }
