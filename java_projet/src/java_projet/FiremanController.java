@@ -42,7 +42,7 @@ public class FiremanController implements Initializable
     
     public FiremanController()
     {
-        this.bcms = Java_projet.getBcms();
+        this.bcms = gestionPF.getBcms();
     }
 
     /**
@@ -79,12 +79,12 @@ public class FiremanController implements Initializable
     @FXML
     private void quitApp()
     {
-        Java_projet.quit();
+        gestionPF.quit();
     }
     
     @FXML
     private void backHome(MouseEvent event) throws IOException
     {
-        Java_projet.changeScene("connectionPage.fxml");
+        gestionPF.changeScene("connectionPage.fxml");
     }    
 }

@@ -32,7 +32,7 @@ public class ConnectionPageController implements Initializable
 
     public ConnectionPageController()
     {
-        this.bcms = Java_projet.getBcms();
+        this.bcms = gestionPF.getBcms();
     }
     
     /**
@@ -47,21 +47,21 @@ public class ConnectionPageController implements Initializable
     @FXML
     private void copConnection(MouseEvent event) throws IOException, Statechart_exception
     {
-        Java_projet.changeScene("policeman.fxml");
+        gestionPF.changeScene("policeman.fxml");
         this.bcms.PSC_connection_request();
     }
 
     @FXML
     private void fireConnection(MouseEvent event) throws IOException, Statechart_exception
     {
-        Java_projet.changeScene("fireman.fxml");
+        gestionPF.changeScene("fireman.fxml");
         this.bcms.FSC_connection_request();
     }
 
     @FXML
     private void quitApp(MouseEvent event)
     {
-        Java_projet.quit();
+        gestionPF.quit();
     }
     
 }

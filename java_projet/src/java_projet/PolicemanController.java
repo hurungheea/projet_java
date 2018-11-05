@@ -25,7 +25,7 @@ public class PolicemanController implements Initializable
     
     public PolicemanController()
     {
-        this.bcms = Java_projet.getBcms();
+        this.bcms = gestionPF.getBcms();
     }
 
 
@@ -41,6 +41,6 @@ public class PolicemanController implements Initializable
     @FXML
     private void backHome(MouseEvent event) throws IOException
     {
-        Java_projet.changeScene("connectionPage.fxml");
+        gestionPF.changeScene("connectionPage.fxml");
     }
 }

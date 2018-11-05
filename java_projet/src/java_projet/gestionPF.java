@@ -20,7 +20,7 @@ import com.pauware.pauware_engine._Exception.Statechart_exception;
  * @author achantelou
  */
 
-public class Java_projet extends Application 
+public class gestionPF extends Application 
 {
     private static BCMS bcms;
     
@@ -28,7 +28,7 @@ public class Java_projet extends Application
     private static Parent page;
     private static Scene scene;
     
-    public Java_projet() throws Statechart_exception
+    public gestionPF() throws Statechart_exception
     {
         stage = new Stage();
         bcms = new BCMS();
@@ -43,10 +43,10 @@ public class Java_projet extends Application
     public void start(Stage stage) throws Exception
     {
         Parent root = FXMLLoader.load(getClass().getResource("connectionPage.fxml"));
-        Java_projet.scene = new Scene(root);
-        Java_projet.scene.getStylesheets().add(Java_projet.class.getResource("style.css").toExternalForm());
-        Java_projet.stage.setScene(scene);
-        Java_projet.stage.show();
+        gestionPF.scene = new Scene(root);
+        gestionPF.scene.getStylesheets().add(gestionPF.class.getResource("style.css").toExternalForm());
+        gestionPF.stage.setScene(scene);
+        gestionPF.stage.show();
     }
 
     /**
@@ -63,19 +63,19 @@ public class Java_projet extends Application
      */
     public static final void changeScene(String fxml) throws IOException
     {
-        Java_projet.page = (Parent) FXMLLoader.load(Java_projet.class.getResource(fxml));
+        gestionPF.page = (Parent) FXMLLoader.load(gestionPF.class.getResource(fxml));
         
-        Java_projet.scene = Java_projet.stage.getScene();
-        Java_projet.scene = new Scene(Java_projet.page,700,420);
-        Java_projet.scene.getStylesheets().add(Java_projet.class.getResource("style.css").toExternalForm());
+        gestionPF.scene = gestionPF.stage.getScene();
+        gestionPF.scene = new Scene(gestionPF.page,700,420);
+        gestionPF.scene.getStylesheets().add(gestionPF.class.getResource("style.css").toExternalForm());
         
-        Java_projet.stage.setScene(Java_projet.scene);
-        Java_projet.stage.show();
+        gestionPF.stage.setScene(gestionPF.scene);
+        gestionPF.stage.show();
     }
     
     public static final BCMS getBcms()
     {
-        return Java_projet.bcms;
+        return gestionPF.bcms;
     }
     
     public static final void quit()
