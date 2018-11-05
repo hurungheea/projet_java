@@ -10,6 +10,7 @@ import com.pauware.pauware_engine._Exception.Statechart_exception;
 import java.awt.Color;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -55,12 +56,14 @@ public class FiremanController implements Initializable
     }    
 
     @FXML
-    private void valideInt(MouseEvent event) throws IOException, Statechart_exception, InterruptedException
+    private void valideInt(MouseEvent event) throws IOException, Statechart_exception, InterruptedException, SQLException
     {
         Pattern p = Pattern.compile("[0-9]{2}|[0-9]{1}");
         Matcher m = p.matcher(fTruckInput.getText());
+
+        System.out.println(this.bcms.get_fire_trucks().size());
         
-        if(!(fTruckInput.getText().length() > 0 && m.matches()))
+        if(!((fTruckInput.getText().length() > 0 && m.matches())))
         {
             fTruckInput.getStyleClass().add("inputException");
         }

@@ -781,7 +781,8 @@ public class BCMS extends Timer_monitor {
         try (java.sql.Connection connection = java.sql.DriverManager.getConnection("jdbc:derby:BCMS_database")) {
             java.sql.ResultSet rs = connection.createStatement(java.sql.ResultSet.TYPE_SCROLL_INSENSITIVE, java.sql.ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM Fire_truck");
             rs.beforeFirst();
-            while (rs.next()) {
+            while (rs.next())
+            {
                 fire_trucks.add(rs.getString("fire_truck_name"));
             }
         }
@@ -860,7 +861,8 @@ public class BCMS extends Timer_monitor {
         return -1;
     }
 
-    public static void main(String args[]) {
+    public static void main(String args[])
+    {
         try
         {
             BCMS bCMS = new BCMS();
