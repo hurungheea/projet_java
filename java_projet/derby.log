@@ -1,11 +1,11 @@
 ----------------------------------------------------------------
-Mon Nov 05 18:46:48 CET 2018:
-Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0166-e4fb-f07f-000006507b88 
-on database directory /import/etud/28/ahurunchee/Bureau/projet_java/projet_java/java_projet/BCMS_database with class loader sun.misc.Launcher$AppClassLoader@55f96302 
-Loaded from file:/import/etud/28/ahurunchee/Bureau/projet_java/projet_java/java_projet/dist/run1252829392/lib/derby.jar
+Mon Nov 05 23:05:27 CET 2018:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.10.2.0 - (1582446): instance a816c00e-0166-e5e8-bb71-000002c29c40 
+on database directory /home/ashx/Bureau/java_prog/projet_java/java_projet/BCMS_database with class loader sun.misc.Launcher$AppClassLoader@55f96302 
+Loaded from file:/home/ashx/Bureau/java_prog/projet_java/java_projet/dist/run1399211361/lib/derby.jar
 java.vendor=Oracle Corporation
 java.runtime.version=1.8.0_181-b13
-user.dir=/import/etud/28/ahurunchee/Bureau/projet_java/projet_java/java_projet
+user.dir=/home/ashx/Bureau/java_prog/projet_java/java_projet
 os.name=Linux
 os.arch=amd64
 os.version=4.15.0-36-generic

@@ -20,6 +20,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import java.util.regex.*;
+import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.MenuButton;
 import javafx.scene.layout.Border;
 
 /**
@@ -30,55 +32,34 @@ import javafx.scene.layout.Border;
 public class FiremanController implements Initializable
 {
     private BCMS bcms;
+    private int nbFTruck;
+    
     @FXML
     private Button backBtn;
-    @FXML
-    private TextField fTruckInput;
+    
     @FXML
     private Label topLabel;
     @FXML
-    private Label textFieldErrorMessage;
-    @FXML
-    private Button manyBtn;
+    private ChoiceBox<String> select;
     
-    public FiremanController()
+    public FiremanController() throws SQLException
     {
         this.bcms = gestionPF.getBcms();
+        this.nbFTruck = this.bcms.get_fire_trucks().size();
     }
 
     /**
      * Initializes the controller class.
      */
     @Override
-    public void initialize(URL url, ResourceBundle rb)
+    public void initialize(URL url, ResourceBundle rb) 
     {
-        // TODO
-    }    
-
-    @FXML
-    private void valideInt(MouseEvent event) throws IOException, Statechart_exception, InterruptedException, SQLException
-    {
-        Pattern p = Pattern.compile("[0-9]{2}|[0-9]{1}");
-        Matcher m = p.matcher(fTruckInput.getText());
-
-        System.out.println(this.bcms.get_fire_trucks().size());
-        
-        if(!((fTruckInput.getText().length() > 0 && m.matches())))
+        for(int i=1;i<= this.nbFTruck;i++)
         {
-            fTruckInput.getStyleClass().add("inputException");
-        }
-        else
-        {
-            fTruckInput.getStyleClass().add("textField");
-            bcms.state_fire_truck_number(Integer.parseInt(fTruckInput.getText()));
-            manyBtn.setDisable(true);
-            bcms.route_for_fire_trucks();
-            bcms.FSC_agrees_about_fire_truck_route();
-            bcms.route_for_fire_trucks();
-            bcms.FSC_agrees_about_fire_truck_route();
-            Thread.sleep(100);
+            select.getItems().add(String.valueOf(i));
         }
     }    
+
     @FXML
     private void quitApp()
     {

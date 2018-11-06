@@ -2,6 +2,7 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
+<?import javafx.collections.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -12,15 +13,15 @@
     <Label fx:id="topLabel" layoutX="25.0" layoutY="25.0" text="fireman" />
     <VBox layoutX="16.0" layoutY="62.0" prefHeight="248.0" prefWidth="570.0">
       <children>
-        <HBox prefHeight="31.0" prefWidth="572.0">
+        <HBox prefHeight="47.0" prefWidth="570.0">
           <children>
             <Label prefWidth="349.0000999999975" text="How many fire truck would you want to deploy ?" />
-            <TextField fx:id="fTruckInput" prefWidth="79.0" scaleX="1.0" />
-            <Button fx:id="manyBtn" mnemonicParsing="false" onMouseClicked="#valideInt" prefHeight="22.0" prefWidth="84.0" text="sure ?">
-              <HBox.margin>
-                <Insets left="25.0" />
-              </HBox.margin>
-            </Button>
+            <ChoiceBox fx:id="select">
+              <items>
+                <FXCollections fx:factory="observableArrayList">
+                </FXCollections>
+              </items>
+            </ChoiceBox>
           </children>
         </HBox>
       </children>
