@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.collections.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="658.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="java_projet.PolicemanController">
+  <children>
+    <Label fx:id="topLabel" layoutX="25.0" layoutY="25.0" text="policeman" />
+    <VBox layoutX="16.0" layoutY="62.0" prefHeight="228.0" prefWidth="627.9998779296875">
+      <children>
+        <HBox prefHeight="165.0" prefWidth="570.0">
+          <children>
+            <Label prefWidth="321.0" text="How many police vehicles would you want to deploy ?" />
+            <ChoiceBox fx:id="select">
+              <items>
+                <FXCollections fx:factory="observableArrayList" />
+              </items>
+            </ChoiceBox>
+            <TextArea fx:id="maConsole" maxWidth="350.0" prefHeight="165.0" prefWidth="273.0" wrapText="true">
+              <HBox.margin>
+                <Insets left="10.0" right="25.0" />
+              </HBox.margin>
+            </TextArea>
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+    <Button fx:id="backBtn" layoutX="257.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#backHome" prefHeight="76.0" prefWidth="178.0" text="Back to home page" />
+    <Button layoutX="113.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#quitApp" text="Quitter" />
+  </children>
+</AnchorPane>

@@ -1,0 +1,55 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 23 oct. 2018, 12:04:16
+    Author     : alexiz
+*/
+
+.choice-box
+{
+    -fx-background-color:#000B29;
+    -fx-border-color: #EDB83D;
+    -fx-control-inner-background:#000B29;
+    -fx-border-color: #EDB83D;
+}
+
+.textField
+{
+    -fx-background-color: rgb(255,255,255);
+    -fx-border-color: #EDB83D;
+    -fx-text-fill: #000000;
+}
+
+.text-area
+{
+    -fx-border-color: #EDB83D;
+    -fx-background-color: #000B29;
+    -fx-text-fill: #EDB83D;
+    -fx-control-inner-background:#000B29;
+}
+
+#policeLabel
+{
+    -fx-background-color: #D70026;
+    -fx-text-fill: rgb(255,255,255);
+}
+
+.root
+{
+    -fx-background-color: #000B29;
+}
+
+.button
+{
+    -fx-background-color: #D70026;
+    -fx-text-fill: #F8F5F2;
+}
+
+.label
+{
+    -fx-text-fill: #EDB83D;
+}
+
