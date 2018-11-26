@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java_projet;
+package java_projet.Controller;
 
 import com.FranckBarbier.Java._BCMS.BCMS;
 import com.pauware.pauware_engine._Exception.Statechart_exception;
@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java_projet.Model.JavaOutils;
+import java_projet.Model.gestionPF;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

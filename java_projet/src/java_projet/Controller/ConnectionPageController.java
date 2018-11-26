@@ -1,4 +1,4 @@
-package java_projet;
+package java_projet.Controller;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,6 +11,7 @@ import com.pauware.pauware_engine._Exception.Statechart_exception;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java_projet.Model.gestionPF;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;

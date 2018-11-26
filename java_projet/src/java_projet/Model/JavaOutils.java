@@ -1,4 +1,4 @@
-package java_projet;
+package java_projet.Model;
 
 import com.FranckBarbier.Java._BCMS.BCMS;
 import com.sun.prism.paint.Color;
@@ -11,6 +11,7 @@ public class JavaOutils
     
     private static JavaOutils INSTANCE = new JavaOutils();
     public final static Logger logger = Logger.getLogger(gestionPF.class);
+    public final String[] files = {"./View/connectionPage.fxml","./View/fireman.fxml","./View/policeman.fxml","./View/style.css"};
     
     public static JavaOutils getInstance()
     {

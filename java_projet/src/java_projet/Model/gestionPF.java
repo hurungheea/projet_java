@@ -1,4 +1,4 @@
-package java_projet;
+package java_projet.Model;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
