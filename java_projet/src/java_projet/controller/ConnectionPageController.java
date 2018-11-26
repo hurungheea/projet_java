@@ -1,4 +1,4 @@
-package java_projet.Controller;
+package java_projet.controller;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -11,11 +11,12 @@ import com.pauware.pauware_engine._Exception.Statechart_exception;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java_projet.Model.gestionPF;
+import java_projet.model.GestionPF;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
+import java_projet.model.JavaOutils;
 
 /**
  * FXML Controller class
@@ -28,12 +29,13 @@ public class ConnectionPageController implements Initializable
 
     @FXML
     private Button copsBtn;
+    
     @FXML
     private Button fmBtn;
 
     public ConnectionPageController()
     {
-        this.bcms = gestionPF.getBcms();
+        this.bcms = GestionPF.getBcms();
     }
     
     /**
@@ -48,21 +50,21 @@ public class ConnectionPageController implements Initializable
     @FXML
     private void copConnection(MouseEvent event) throws IOException, Statechart_exception
     {
-        gestionPF.changeScene("policeman.fxml");
+        GestionPF.changeScene(JavaOutils.getInstance().file.get("policeman"));
         this.bcms.PSC_connection_request();
     }
 
     @FXML
     private void fireConnection(MouseEvent event) throws IOException, Statechart_exception
     {
-        gestionPF.changeScene("fireman.fxml");
+        GestionPF.changeScene(JavaOutils.getInstance().file.get("fireman"));
         this.bcms.FSC_connection_request();
     }
 
     @FXML
     private void quitApp(MouseEvent event)
     {
-        gestionPF.quit();
+        GestionPF.quit();
     }
     
 }

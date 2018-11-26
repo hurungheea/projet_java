@@ -8,14 +8,14 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="658.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="java_projet.PolicemanController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="658.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="java_projet.controller.FiremanController">
   <children>
-    <Label fx:id="topLabel" layoutX="25.0" layoutY="25.0" text="policeman" />
+    <Label fx:id="topLabel" layoutX="25.0" layoutY="25.0" text="fireman" />
     <VBox layoutX="16.0" layoutY="62.0" prefHeight="228.0" prefWidth="627.9998779296875">
       <children>
         <HBox prefHeight="165.0" prefWidth="570.0">
           <children>
-            <Label prefWidth="321.0" text="How many police vehicles would you want to deploy ?" />
+            <Label prefWidth="321.0" text="How many fire truck would you want to deploy ?" />
             <ChoiceBox fx:id="select">
               <items>
                 <FXCollections fx:factory="observableArrayList" />

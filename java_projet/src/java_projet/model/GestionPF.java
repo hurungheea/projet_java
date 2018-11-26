@@ -1,4 +1,4 @@
-package java_projet.Model;
+package java_projet.model;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,12 +16,7 @@ import com.FranckBarbier.Java._BCMS.BCMS;
 import com.pauware.pauware_engine._Exception.Statechart_exception;
 import org.apache.log4j.BasicConfigurator;
 
-/**
- *
- * @author achantelou
- */
-
-public class gestionPF extends Application 
+public class GestionPF extends Application 
 {
     private static BCMS bcms;
         
@@ -29,7 +24,7 @@ public class gestionPF extends Application
     private static Parent page;
     private static Scene scene;
     
-    public gestionPF() throws Statechart_exception
+    public GestionPF() throws Statechart_exception
     {
         stage = new Stage();
         bcms = new BCMS();
@@ -43,11 +38,11 @@ public class gestionPF extends Application
     @Override
     public void start(Stage stage) throws Exception
     {
-        Parent root = FXMLLoader.load(getClass().getResource("connectionPage.fxml"));
-        gestionPF.scene = new Scene(root);
-        gestionPF.scene.getStylesheets().add(gestionPF.class.getResource("style.css").toExternalForm());
-        gestionPF.stage.setScene(scene);
-        gestionPF.stage.show();
+        Parent root = FXMLLoader.load(getClass().getResource(JavaOutils.getInstance().file.get("connectionPage")));
+        GestionPF.scene = new Scene(root);
+        GestionPF.scene.getStylesheets().add(GestionPF.class.getResource(JavaOutils.getInstance().file.get("style")).toExternalForm());
+        GestionPF.stage.setScene(scene);
+        GestionPF.stage.show();
     }
 
     /**
@@ -65,19 +60,19 @@ public class gestionPF extends Application
      */
     public static final void changeScene(String fxml) throws IOException
     {
-        gestionPF.page = (Parent) FXMLLoader.load(gestionPF.class.getResource(fxml));
+        GestionPF.page = (Parent) FXMLLoader.load(GestionPF.class.getResource(fxml));
         
-        gestionPF.scene = gestionPF.stage.getScene();
-        gestionPF.scene = new Scene(gestionPF.page,700,420);
-        gestionPF.scene.getStylesheets().add(gestionPF.class.getResource("style.css").toExternalForm());
+        GestionPF.scene = GestionPF.stage.getScene();
+        GestionPF.scene = new Scene(GestionPF.page,700,420);
+        GestionPF.scene.getStylesheets().add(GestionPF.class.getResource(JavaOutils.getInstance().file.get("style")).toExternalForm());
         
-        gestionPF.stage.setScene(gestionPF.scene);
-        gestionPF.stage.show();
+        GestionPF.stage.setScene(GestionPF.scene);
+        GestionPF.stage.show();
     }
     
     public static final BCMS getBcms()
     {
-        return gestionPF.bcms;
+        return GestionPF.bcms;
     }
     
     public static final void quit()

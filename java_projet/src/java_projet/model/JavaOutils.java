@@ -1,18 +1,25 @@
-package java_projet.Model;
+package java_projet.model;
 
 import com.FranckBarbier.Java._BCMS.BCMS;
 import com.sun.prism.paint.Color;
+import java.util.HashMap;
 import javafx.scene.control.TextArea;
 import org.apache.log4j.Logger;
+import java.util.Map;
 
 public class JavaOutils 
 {
-    private JavaOutils(){}
+    private JavaOutils()
+    {
+        this.file.put("connectionPage","/java_projet/view/connectionPage.fxml");
+        this.file.put("fireman","/java_projet/view/fireman.fxml");
+        this.file.put("policeman","/java_projet/view/policeman.fxml");
+        this.file.put("style","/java_projet/view/style.css");
+    }
     
     private static JavaOutils INSTANCE = new JavaOutils();
-    public final static Logger logger = Logger.getLogger(gestionPF.class);
-    public final String[] files = {"./View/connectionPage.fxml","./View/fireman.fxml","./View/policeman.fxml","./View/style.css"};
-    
+    public final static Logger logger = Logger.getLogger(GestionPF.class);
+    public final Map<String,String> file = new HashMap<>();
     public static JavaOutils getInstance()
     {
         synchronized (JavaOutils.class) // pour le multithreading ! On ne sait jamais

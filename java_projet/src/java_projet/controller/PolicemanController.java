@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package java_projet.Controller;
+package java_projet.controller;
 
 import com.FranckBarbier.Java._BCMS.BCMS;
 import com.pauware.pauware_engine._Exception.Statechart_exception;
@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java_projet.Model.JavaOutils;
-import java_projet.Model.gestionPF;
+import java_projet.model.JavaOutils;
+import java_projet.model.GestionPF;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -46,7 +46,7 @@ public class PolicemanController implements Initializable
     
     public PolicemanController() throws SQLException
     {
-        this.bcms = gestionPF.getBcms();
+        this.bcms = GestionPF.getBcms();
         this.listPVehicles = this.bcms.get_police_vehicles();
     }
 
@@ -131,16 +131,16 @@ public class PolicemanController implements Initializable
     }
     
     @FXML
-    private void backHome(MouseEvent event) throws IOException
+    private void backHome(MouseEvent event) throws IOException, Statechart_exception
     {
-        gestionPF.changeScene("connectionPage.fxml");
+        this.bcms.close();
+        GestionPF.changeScene(JavaOutils.getInstance().file.get("connectionPage"));
     }
 
     @FXML
     private void quitApp(MouseEvent event) throws Statechart_exception
     {
         this.bcms.close();
-        gestionPF.quit();    
-
+        GestionPF.quit();
     }
 }
