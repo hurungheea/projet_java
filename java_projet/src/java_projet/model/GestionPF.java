@@ -41,6 +41,7 @@ public class GestionPF extends Application
         Parent root = FXMLLoader.load(getClass().getResource(JavaOutils.getInstance().file.get("connectionPage")));
         GestionPF.scene = new Scene(root);
         GestionPF.scene.getStylesheets().add(GestionPF.class.getResource(JavaOutils.getInstance().file.get("style")).toExternalForm());
+        GestionPF.stage.setResizable(false);
         GestionPF.stage.setScene(scene);
         GestionPF.stage.show();
     }

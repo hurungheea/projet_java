@@ -10,6 +10,7 @@ import com.pauware.pauware_engine._Exception.Statechart_exception;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+import java.util.Collections;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -34,7 +35,7 @@ import java_projet.model.JavaOutils;
 public class FiremanController implements Initializable
 {
     private final BCMS bcms;
-    private final List<String> listFTruck;
+    private List<String> listFTruck;
     
     @FXML
     private Button backBtn;
@@ -46,10 +47,18 @@ public class FiremanController implements Initializable
     @FXML
     private TextArea maConsole;
     
-    public FiremanController() throws SQLException
+    public FiremanController()
     {
         this.bcms = GestionPF.getBcms();
-        this.listFTruck = this.bcms.get_fire_trucks();
+        try
+        {
+            this.listFTruck = this.bcms.get_fire_trucks();
+        }
+        catch(SQLException err)
+        {   
+            JavaOutils.getInstance().afficheMaConsole(maConsole,"La connexion à la base de donnée est rompue, \n contactez votre administrateur reseau ");
+            this.listFTruck = Collections.emptyList();
+        }
     }
 
     /**
@@ -60,7 +69,6 @@ public class FiremanController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
-        //maConsole.setDisable(true);
         maConsole.setEditable(false);
         for(int i=1;i<= this.listFTruck.size();i++)
         {
