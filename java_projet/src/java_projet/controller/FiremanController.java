@@ -79,79 +79,96 @@ public class FiremanController implements Initializable
                 selectedItemProperty.addListener((obs,old,newValue) -> 
                 {
                     int nbTruck = Integer.parseInt(newValue);
+                    select.setDisable(true);
                     try
                     {
-                        this.bcms.state_fire_truck_number(nbTruck);
-                        this.listFTruck.stream().limit(nbTruck).forEach(
-                            elt ->
-                            { 
-                                JavaOutils.getInstance().afficheMaConsole(maConsole,"Idle " + elt);
-                                JavaOutils.getInstance().logger.info("Idle " + elt);
-                            });
-                        JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
-                        Thread.sleep(10);
-                        this.bcms.route_for_fire_trucks();
-                        this.bcms.FSC_disagrees_about_fire_truck_route();
-                        this.bcms.route_for_fire_trucks();
-                        this.bcms.FSC_agrees_about_fire_truck_route();
-                        Thread.sleep(10);
-                        this.listFTruck.stream().limit(nbTruck).forEach(
-                            elt ->
-                            {
-                                try
-                                {
-                                    this.bcms.fire_truck_dispatched(elt);
-                                    Thread.sleep(10);
-                                    this.bcms.get_fire_trucks(BCMS.Status.Dispatched);
-                                    JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Dispatched + ": " + elt);
-                                }
-                                catch(InterruptedException|Statechart_exception|SQLException ex)
-                                {
-                                    JavaOutils.getInstance().logger.fatal(ex);
-                                }
-                            });
-                        JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
-                        this.listFTruck.stream().limit(nbTruck).forEach(
-                            elt ->
-                            {
-                                try
-                                {
-                                    this.bcms.get_fire_trucks(BCMS.Status.Breakdown);
-                                    JavaOutils.getInstance().logger.info(BCMS.Status.Breakdown + ": " + elt);
-                                    JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Breakdown + ": " + elt);
-                                }
-                                catch(SQLException ex)
-                                {
-                                    JavaOutils.getInstance().logger.fatal(ex);
-                                }
-                            }
-                        );
-                        this.listFTruck.stream().limit(nbTruck).forEach(
-                            elt ->
-                            {
-                                try
-                                {
-                                    this.bcms.get_fire_trucks(BCMS.Status.Arrived);
-                                    JavaOutils.getInstance().logger.info(BCMS.Status.Arrived + ": " + elt);
-                                    JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Arrived + ": " + elt);
-                                    Thread.sleep(10);
-                                }
-                                catch(InterruptedException | SQLException ex)
-                                {
-                                    JavaOutils.getInstance().logger.fatal(ex);
-                                }
-                                
-                            }
-                        );
+                        this.sendFireTrucks(nbTruck);
+                        this.dispatchedFireTrucks(nbTruck);
+                        this.breakdownFireTrucks(nbTruck);
+                        this.arrivedFireTruck(nbTruck);
                         this.bcms.close();
                     }
-                    catch(InterruptedException|Statechart_exception ex)
+                    catch(Statechart_exception ex)
                     {
                         JavaOutils.getInstance().logger.fatal(ex);
                     }
                 });
-    }    
+    }
 
+    private void sendFireTrucks(int nbTruck) throws Statechart_exception
+    {
+        this.bcms.state_fire_truck_number(nbTruck);
+            this.listFTruck.stream().limit(nbTruck).forEach(
+                elt ->
+                { 
+                    JavaOutils.getInstance().afficheMaConsole(maConsole,"Idle " + elt);
+                    JavaOutils.getInstance().logger.info("Idle " + elt);
+                });
+            JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
+            this.bcms.route_for_fire_trucks();
+            this.bcms.FSC_disagrees_about_fire_truck_route();
+            this.bcms.route_for_fire_trucks();
+            this.bcms.FSC_agrees_about_fire_truck_route();
+    }
+    
+    private void breakdownFireTrucks(int nbTruck)
+    {
+        this.listFTruck.stream().limit(nbTruck).forEach(
+            elt ->
+            {
+                try
+                {
+                    this.bcms.get_fire_trucks(BCMS.Status.Breakdown);
+                    JavaOutils.getInstance().logger.info(BCMS.Status.Breakdown + ": " + elt);
+                    JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Breakdown + ": " + elt);
+                }
+                catch(SQLException ex)
+                {
+                    JavaOutils.getInstance().logger.fatal(ex);
+                }
+            }
+        );
+    }
+    
+    private void dispatchedFireTrucks(int nbTruck)
+    {
+         this.listFTruck.stream().limit(nbTruck).forEach(
+            elt ->
+            {
+                try
+                {
+                    this.bcms.fire_truck_dispatched(elt);
+                    this.bcms.get_fire_trucks(BCMS.Status.Dispatched);
+                    JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Dispatched + ": " + elt);
+                }
+                catch(Statechart_exception|SQLException ex)
+                {
+                    JavaOutils.getInstance().logger.fatal(ex);
+                }
+            });
+        JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
+    }
+    
+    private void arrivedFireTruck(int nbTruck)
+    {
+        this.listFTruck.stream().limit(nbTruck).forEach(
+            elt ->
+            {
+                try
+                {
+                    this.bcms.get_fire_trucks(BCMS.Status.Arrived);
+                    JavaOutils.getInstance().logger.info(BCMS.Status.Arrived + ": " + elt);
+                    JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Arrived + ": " + elt);
+                }
+                catch(SQLException ex)
+                {
+                    JavaOutils.getInstance().logger.fatal(ex);
+                }
+
+            }
+        );
+    }
+    
     @FXML
     private void quitApp() throws Statechart_exception
     {

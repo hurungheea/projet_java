@@ -66,6 +66,7 @@ public class PolicemanController implements Initializable
                 selectedItemProperty.addListener((obs,old,newValue) -> 
                 {
                     int nbVehicles = Integer.parseInt(newValue);
+                    select.setDisable(true);
                     try
                     {
                         this.bcms.state_police_vehicle_number(nbVehicles);
