@@ -119,10 +119,11 @@ public class FiremanController implements Initializable
                 try
                 {
                     this.bcms.get_fire_trucks(BCMS.Status.Breakdown);
+                    this.bcms.fire_truck_breakdown(elt,"");
                     JavaOutils.getInstance().logger.info(BCMS.Status.Breakdown + ": " + elt);
                     JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Breakdown + ": " + elt);
                 }
-                catch(SQLException ex)
+                catch(Statechart_exception | SQLException ex)
                 {
                     JavaOutils.getInstance().logger.fatal(ex);
                 }
@@ -149,18 +150,19 @@ public class FiremanController implements Initializable
         JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
     }
     
-    private void arrivedFireTruck(int nbTruck)
+    private void arrivedFireTruck(int nbTruck) 
     {
         this.listFTruck.stream().limit(nbTruck).forEach(
             elt ->
             {
                 try
                 {
+                    this.bcms.fire_truck_arrived(elt);
                     this.bcms.get_fire_trucks(BCMS.Status.Arrived);
                     JavaOutils.getInstance().logger.info(BCMS.Status.Arrived + ": " + elt);
                     JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Arrived + ": " + elt);
                 }
-                catch(SQLException ex)
+                catch(Statechart_exception | SQLException ex)
                 {
                     JavaOutils.getInstance().logger.fatal(ex);
                 }

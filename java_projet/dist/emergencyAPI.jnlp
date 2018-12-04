@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="java_projet.jnlp">
+<jnlp spec="1.0" xmlns:jfx="http://javafx.com" href="emergencyAPI.jnlp">
   <information>
-    <title>java_projet</title>
+    <title>emergencyAPI</title>
     <vendor>achantelou</vendor>
     <description>null</description>
     <offline-allowed/>
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="java_projet.jar" size="15510" download="eager" />
+    <jar href="emergencyAPI.jar" size="15662" download="eager" />
     <jar href="lib/BCMS.jar" size="41803" download="eager" />
     <jar href="lib/PauWare_Java_EE.jar" size="82402" download="eager" />
     <jar href="lib/derby.jar" size="2838580" download="eager" />
     <jar href="lib/log4j-1.2.17.jar" size="489883" download="eager" />
   </resources>
-  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="java_projet" >
+  <applet-desc  width="800" height="600" main-class="com.javafx.main.NoJavaFXFallback"  name="emergencyAPI" >
     <param name="requiredFXVersion" value="8.0+"/>
   </applet-desc>
-  <jfx:javafx-desc  width="800" height="600" main-class="java_projet.model.GestionPF"  name="java_projet" />
+  <jfx:javafx-desc  width="800" height="600" main-class="java_projet.model.GestionPF"  name="emergencyAPI" />
   <update check="always"/>
 </jnlp>

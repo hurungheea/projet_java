@@ -122,8 +122,16 @@ public class PolicemanController implements Initializable
         this.listPVehicles.stream().limit(nbPTruck).forEach(
         elt ->
         { 
-            JavaOutils.getInstance().logger.info(BCMS.Status.Breakdown + ": " + elt);
-            JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Breakdown + ": " + elt);
+            try
+            {
+                this.bcms.police_vehicle_breakdown(elt,"");
+                JavaOutils.getInstance().logger.info(BCMS.Status.Breakdown + ": " + elt);
+                JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Breakdown + ": " + elt);    
+            }
+            catch(Statechart_exception ex)
+            {
+                JavaOutils.getInstance().logger.fatal(ex);
+            }
         }
         );
     }

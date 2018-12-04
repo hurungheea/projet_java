@@ -573,7 +573,8 @@ public class BCMS extends Timer_monitor {
         _bCMS_state_machine.run_to_completion(_Crisis_is_less_severe);
     }
 
-    public void close() throws Statechart_exception {
+    public void close() throws Statechart_exception
+    {
         _bCMS_state_machine.run_to_completion(_Close);
     }
 
