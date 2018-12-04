@@ -65,72 +65,80 @@ public class PolicemanController implements Initializable
          ReadOnlyObjectProperty<String> selectedItemProperty = select.getSelectionModel().selectedItemProperty();
                 selectedItemProperty.addListener((obs,old,newValue) -> 
                 {
-                    int nbVehicles = Integer.parseInt(newValue);
+                    int nbPoliceTruck = Integer.parseInt(newValue);
                     select.setDisable(true);
                     try
                     {
-                        this.bcms.state_police_vehicle_number(nbVehicles);
-                        this.listPVehicles.stream().limit(nbVehicles).forEach(
-                            elt ->
-                            { 
-                                JavaOutils.getInstance().afficheMaConsole(maConsole,"Idle " + elt);
-                                JavaOutils.getInstance().logger.info("Idle " + elt);
-                            });
-                        JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
-                        Thread.sleep(10);
-                        this.bcms.route_for_police_vehicles();
-                        this.bcms.FSC_disagrees_about_fire_truck_route();
-                        this.bcms.route_for_police_vehicles();
-                        this.bcms.FSC_agrees_about_fire_truck_route();
-                        Thread.sleep(10);
-                       this.listPVehicles.stream().limit(nbVehicles).forEach(
-                            elt ->
-                            {
-                                try
-                                {
-                                    this.bcms.police_vehicle_dispatched(elt);
-                                    Thread.sleep(10);
-                                    this.bcms.get_police_vehicles(BCMS.Status.Dispatched);  
-                                    JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Dispatched + ": " + elt);
-                                }
-                                catch(InterruptedException|Statechart_exception|SQLException ex)
-                                {
-                                    JavaOutils.getInstance().logger.fatal(ex);
-                                }
-                            });
-                         JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
-                        this.listPVehicles.stream().limit(nbVehicles).forEach(
-                            elt ->
-                            { 
-                                JavaOutils.getInstance().logger.info(BCMS.Status.Breakdown + ": " + elt);
-                                JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Breakdown + ": " + elt);
-                            }
-                        );
-                         this.listPVehicles.stream().limit(nbVehicles).forEach(
-                            elt ->
-                            {
-                                JavaOutils.getInstance().logger.info(BCMS.Status.Arrived + ": " + elt);
-                                JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Arrived + ": " + elt);
-                                try
-                                {
-                                    Thread.sleep(10);
-                                }
-                                catch(InterruptedException ex)
-                                {
-                                    JavaOutils.getInstance().logger.fatal(ex);
-                                }
-                                
-                            }
-                        );
+                        this.sendPoliceTruck(nbPoliceTruck);
+                        this.dispatchedFireTrucks(nbPoliceTruck);
+                        this.breakdownFireTrucks(nbPoliceTruck);
+                        this.arrivedFireTruck(nbPoliceTruck);
                         this.bcms.close();
                     }
-                    catch(InterruptedException|Statechart_exception ex)
+                    catch(Statechart_exception ex)
                     {
                         JavaOutils.getInstance().logger.fatal(ex);
                     }
                 });
     }
     
+    private void sendPoliceTruck(int nbPTruck) throws Statechart_exception
+    {
+     this.bcms.state_police_vehicle_number(nbPTruck);
+        this.listPVehicles.stream().limit(nbPTruck).forEach(
+            elt ->
+            { 
+                JavaOutils.getInstance().afficheMaConsole(maConsole,"Idle " + elt);
+                JavaOutils.getInstance().logger.info("Idle " + elt);
+            });
+        JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
+        this.bcms.route_for_police_vehicles();
+        this.bcms.FSC_disagrees_about_fire_truck_route();
+        this.bcms.route_for_police_vehicles();
+        this.bcms.FSC_agrees_about_fire_truck_route();
+    }
+    
+    private void dispatchedFireTrucks(int nbPTruck) throws Statechart_exception
+    {
+        this.listPVehicles.stream().limit(nbPTruck).forEach(
+        elt ->
+        {
+            try
+            {
+                this.bcms.police_vehicle_dispatched(elt);
+                this.bcms.get_police_vehicles(BCMS.Status.Dispatched);  
+                JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Dispatched + ": " + elt);
+            }
+            catch(Statechart_exception | SQLException ex)
+            {
+                JavaOutils.getInstance().logger.fatal(ex);
+            }
+        });
+        JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
+    }
+    
+    private void breakdownFireTrucks(int nbPTruck)
+    {
+        this.listPVehicles.stream().limit(nbPTruck).forEach(
+        elt ->
+        { 
+            JavaOutils.getInstance().logger.info(BCMS.Status.Breakdown + ": " + elt);
+            JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Breakdown + ": " + elt);
+        }
+        );
+    }
+    
+    private void arrivedFireTruck(int nbPTruck)
+    {
+        this.listPVehicles.stream().limit(nbPTruck).forEach(
+            elt ->
+            {
+                JavaOutils.getInstance().logger.info(BCMS.Status.Arrived + ": " + elt);
+                JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Arrived + ": " + elt);                              
+            }
+        );
+    }
+        
     @FXML
     private void backHome(MouseEvent event) throws IOException, Statechart_exception
     {
