@@ -7,30 +7,62 @@
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="658.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="java_projet.controller.FiremanController">
   <children>
-    <Label fx:id="topLabel" layoutX="25.0" layoutY="25.0" text="fireman" />
-    <VBox layoutX="16.0" layoutY="62.0" prefHeight="228.0" prefWidth="627.9998779296875">
+    <VBox layoutX="0.0" layoutY="0.0" padding="$x1" prefHeight="400.0" prefWidth="658.0" spacing="5.0">
       <children>
-        <HBox prefHeight="165.0" prefWidth="570.0">
+        <Label fx:id="topLabel" text="fireman">
+          <font>
+            <Font name="DejaVu Sans ExtraLight" size="24.0" />
+          </font>
+        </Label>
+        <VBox prefHeight="21.0" prefWidth="628.0">
           <children>
-            <Label prefWidth="321.0" text="How many fire truck would you want to deploy ?" />
-            <ChoiceBox fx:id="select">
-              <items>
-                <FXCollections fx:factory="observableArrayList" />
-              </items>
-            </ChoiceBox>
+            <HBox prefHeight="21.0" prefWidth="628.0">
+              <children>
+                <Label prefWidth="321.0" text="How many fire truck would you want to deploy ?">
+                  <HBox.margin>
+                    <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
+                  </HBox.margin>
+                </Label>
+                <ChoiceBox fx:id="select" HBox.margin="$x1">
+                  <items>
+                    <FXCollections fx:factory="observableArrayList" />
+                  </items>
+                </ChoiceBox>
+              </children>
+            </HBox>
+          </children>
+        </VBox>
+        <HBox prefHeight="100.0" prefWidth="200.0">
+          <children>
+            <Label prefWidth="321.0" text="Do you agree with the choosen road ?" HBox.margin="$x1" />
+            <Button fx:id="agreeButton" mnemonicParsing="false" onMouseClicked="#agreeTheRoad" text="YES" HBox.margin="$x1" />
+            <Button fx:id="disagreeButton" mnemonicParsing="false" text="NO" HBox.margin="$x1" />
+          </children>
+        </HBox>
+        <HBox alignment="CENTER_RIGHT" prefHeight="185.0" prefWidth="628.0">
+          <children>
+            <TextArea fx:id="maConsole" maxWidth="350.0" prefHeight="149.0" prefWidth="321.0" wrapText="true">
+              <HBox.margin>
+                <Insets left="10.0" right="25.0" />
+              </HBox.margin>
+            </TextArea>
+          </children>
+        </HBox>
+        <HBox alignment="CENTER" minHeight="68.0" opacity="1.0" prefHeight="68.0" prefWidth="628.0">
+          <children>
+            <Button mnemonicParsing="false" onMouseClicked="#quitApp" text="Quitter" />
+            <Button fx:id="backBtn" mnemonicParsing="false" onMouseClicked="#backHome" prefHeight="76.0" prefWidth="178.0" text="Back to home page">
+              <HBox.margin>
+                <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+              </HBox.margin>
+            </Button>
           </children>
         </HBox>
       </children>
     </VBox>
-    <Button fx:id="backBtn" layoutX="257.0" layoutY="310.0" mnemonicParsing="false" onMouseClicked="#backHome" prefHeight="76.0" prefWidth="178.0" text="Back to home page" />
-    <Button layoutX="113.0" layoutY="338.0" mnemonicParsing="false" onMouseClicked="#quitApp" text="Quitter" />
-        <TextArea fx:id="maConsole" maxWidth="350.0" prefHeight="165.0" prefWidth="273.0" wrapText="true">
-          <HBox.margin>
-            <Insets left="10.0" right="25.0" />
-          </HBox.margin>
-        </TextArea>
   </children>
 </AnchorPane>

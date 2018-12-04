@@ -26,6 +26,7 @@ import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
 import java_projet.model.JavaOutils;
+import javafx.geometry.Insets;
 
 /**
  * FXML Controller class
@@ -46,6 +47,12 @@ public class FiremanController implements Initializable
     private ChoiceBox<String> select;
     @FXML
     private TextArea maConsole;
+    @FXML
+    private Insets x1;
+    @FXML
+    private Button agreeButton;
+    @FXML
+    private Button disagreeButton;
     
     public FiremanController()
     {
@@ -105,12 +112,37 @@ public class FiremanController implements Initializable
                     JavaOutils.getInstance().logger.info("Idle " + elt);
                 });
             JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
-            this.bcms.route_for_fire_trucks();
-            this.bcms.FSC_disagrees_about_fire_truck_route();
-            this.bcms.route_for_fire_trucks();
-            this.bcms.FSC_agrees_about_fire_truck_route();
+
     }
     
+     private void agreeOrNot(boolean isAgree) throws Statechart_exception
+    {
+        if (isAgree)
+        {    
+            this.bcms.route_for_fire_trucks();
+            this.bcms.FSC_agrees_about_fire_truck_route();      
+        }
+        else
+        {
+            this.bcms.route_for_fire_trucks();
+            this.bcms.FSC_disagrees_about_fire_truck_route();
+        }   
+    }
+    
+    @FXML
+    private void agreeTheRoad() throws Statechart_exception
+    { 
+        agreeOrNot(true); 
+    }
+    
+    private void disagreeTheRoad() throws Statechart_exception
+    {
+        agreeOrNot(false);
+    }
+    
+            
+            
+            
     private void breakdownFireTrucks(int nbTruck)
     {
         this.listFTruck.stream().limit(nbTruck).forEach(
@@ -184,4 +216,5 @@ public class FiremanController implements Initializable
         this.bcms.close();
         GestionPF.changeScene(JavaOutils.getInstance().file.get("connectionPage"));
     }    
+
 }
