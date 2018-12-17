@@ -18,6 +18,7 @@ import java_projet.model.JavaOutils;
 import java_projet.model.GestionPF;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -28,13 +29,16 @@ import javafx.scene.control.TextArea;
 /**
  * FXML Controller class
  *
- * @author alexiz
+ * @author Alexis
  */
 public class PolicemanController implements Initializable
 {
     private final BCMS bcms;
+    private int nbPoliceTrucks;
     private final List<String> listPVehicles;
     
+    @FXML
+    private Insets x1;
     @FXML
     private Label topLabel;
     @FXML
@@ -43,14 +47,17 @@ public class PolicemanController implements Initializable
     private TextArea maConsole;
     @FXML
     private Button backBtn;
+    @FXML
+    private Button disagreeButton;
+    @FXML
+    private Button agreeButton;
     
     public PolicemanController() throws SQLException
     {
         this.bcms = GestionPF.getBcms();
+        this.nbPoliceTrucks = 0;
         this.listPVehicles = this.bcms.get_police_vehicles();
     }
-
-
     /**
      * Initializes the controller class.
      */
@@ -65,15 +72,13 @@ public class PolicemanController implements Initializable
          ReadOnlyObjectProperty<String> selectedItemProperty = select.getSelectionModel().selectedItemProperty();
                 selectedItemProperty.addListener((obs,old,newValue) -> 
                 {
-                    int nbPoliceTruck = Integer.parseInt(newValue);
+                	this.nbPoliceTrucks = Integer.parseInt(newValue);
                     select.setDisable(true);
                     try
                     {
-                        this.sendPoliceTruck(nbPoliceTruck);
-                        this.dispatchedFireTrucks(nbPoliceTruck);
-                        this.breakdownFireTrucks(nbPoliceTruck);
-                        this.arrivedFireTruck(nbPoliceTruck);
-                        this.bcms.close();
+                        this.sendPoliceTruck();
+                        this.bcms.route_for_police_vehicles();
+                        JavaOutils.getInstance().afficheMaConsole(maConsole,"Please confirm the route to continue\n");
                     }
                     catch(Statechart_exception ex)
                     {
@@ -82,10 +87,40 @@ public class PolicemanController implements Initializable
                 });
     }
     
-    private void sendPoliceTruck(int nbPTruck) throws Statechart_exception
+    private void agreeOrNot(boolean isAgree) throws Statechart_exception
     {
-     this.bcms.state_police_vehicle_number(nbPTruck);
-        this.listPVehicles.stream().limit(nbPTruck).forEach(
+    	if (isAgree)
+    	{    
+    		this.bcms.FSC_agrees_about_fire_truck_route();
+    		this.dispatchedPoliceTrucks();
+            this.breakdownFireTrucks();
+            this.arrivedFireTruck();
+            this.bcms.close();
+    	}
+    	else
+    	{
+    		this.bcms.FSC_disagrees_about_fire_truck_route();
+    		this.bcms.route_for_police_vehicles();
+    		JavaOutils.getInstance().afficheMaConsole(maConsole,"Please confirm the new path to continue\n");
+    	}   
+    }
+    
+    @FXML
+    private void agreeTheRoad() throws Statechart_exception
+    { 
+    	agreeOrNot(true);
+    	disagreeButton.setDisable(true);
+    }
+    @FXML
+    private void disagreeTheRoad() throws Statechart_exception
+    {
+    	agreeOrNot(false);
+    }
+    
+    private void sendPoliceTruck() throws Statechart_exception
+    {
+     this.bcms.state_police_vehicle_number(this.nbPoliceTrucks);
+        this.listPVehicles.stream().limit(this.nbPoliceTrucks).forEach(
             elt ->
             { 
                 JavaOutils.getInstance().afficheMaConsole(maConsole,"Idle " + elt);
@@ -98,9 +133,9 @@ public class PolicemanController implements Initializable
         this.bcms.FSC_agrees_about_fire_truck_route();
     }
     
-    private void dispatchedFireTrucks(int nbPTruck) throws Statechart_exception
+    private void dispatchedPoliceTrucks() throws Statechart_exception
     {
-        this.listPVehicles.stream().limit(nbPTruck).forEach(
+        this.listPVehicles.stream().limit(this.nbPoliceTrucks).forEach(
         elt ->
         {
             try
@@ -117,9 +152,9 @@ public class PolicemanController implements Initializable
         JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
     }
     
-    private void breakdownFireTrucks(int nbPTruck)
+    private void breakdownFireTrucks() throws Statechart_exception
     {
-        this.listPVehicles.stream().limit(nbPTruck).forEach(
+        this.listPVehicles.stream().limit(this.nbPoliceTrucks).forEach(
         elt ->
         { 
             try
@@ -134,11 +169,12 @@ public class PolicemanController implements Initializable
             }
         }
         );
+        JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
     }
     
-    private void arrivedFireTruck(int nbPTruck)
+    private void arrivedFireTruck() throws Statechart_exception
     {
-        this.listPVehicles.stream().limit(nbPTruck).forEach(
+        this.listPVehicles.stream().limit(this.nbPoliceTrucks).forEach(
             elt ->
             {
                 JavaOutils.getInstance().logger.info(BCMS.Status.Arrived + ": " + elt);

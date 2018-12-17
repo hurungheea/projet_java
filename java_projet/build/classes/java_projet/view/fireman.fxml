@@ -2,18 +2,18 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
-<?import javafx.collections.*?>
-<?import javafx.geometry.*?>
 <?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.collections.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="658.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="java_projet.controller.FiremanController">
   <children>
     <VBox layoutX="0.0" layoutY="0.0" padding="$x1" prefHeight="400.0" prefWidth="658.0" spacing="5.0">
       <children>
-        <Label fx:id="topLabel" text="fireman">
+        <Label fx:id="topLabel" text="Fireman">
           <font>
             <Font name="DejaVu Sans ExtraLight" size="24.0" />
           </font>
@@ -39,8 +39,8 @@
         <HBox prefHeight="100.0" prefWidth="200.0">
           <children>
             <Label prefWidth="321.0" text="Do you agree with the choosen road ?" HBox.margin="$x1" />
-            <Button fx:id="agreeButton" mnemonicParsing="false" onMouseClicked="#agreeTheRoad" text="YES" HBox.margin="$x1" />
-            <Button fx:id="disagreeButton" mnemonicParsing="false" text="NO" HBox.margin="$x1" />
+            <Button fx:id="agreeButton" mnemonicParsing="false" onMouseClicked="#agreeTheRoad" text="yes" HBox.margin="$x1" />
+            <Button fx:id="disagreeButton" mnemonicParsing="false" text="no" HBox.margin="$x1" />
           </children>
         </HBox>
         <HBox alignment="CENTER_RIGHT" prefHeight="185.0" prefWidth="628.0">

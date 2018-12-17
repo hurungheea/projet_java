@@ -36,11 +36,11 @@ import javafx.geometry.Insets;
 public class FiremanController implements Initializable
 {
     private final BCMS bcms;
+    private int nbFireTrucks;
     private List<String> listFTruck;
     
     @FXML
     private Button backBtn;
-    
     @FXML
     private Label topLabel;
     @FXML
@@ -57,6 +57,7 @@ public class FiremanController implements Initializable
     public FiremanController()
     {
         this.bcms = GestionPF.getBcms();
+        this.nbFireTrucks = 0;
         try
         {
             this.listFTruck = this.bcms.get_fire_trucks();
@@ -85,15 +86,14 @@ public class FiremanController implements Initializable
         ReadOnlyObjectProperty<String> selectedItemProperty = select.getSelectionModel().selectedItemProperty();
                 selectedItemProperty.addListener((obs,old,newValue) -> 
                 {
-                    int nbTruck = Integer.parseInt(newValue);
+                	this.nbFireTrucks = Integer.parseInt(newValue);
                     select.setDisable(true);
                     try
                     {
-                        this.sendFireTrucks(nbTruck);
-                        this.dispatchedFireTrucks(nbTruck);
-                        this.breakdownFireTrucks(nbTruck);
-                        this.arrivedFireTruck(nbTruck);
-                        this.bcms.close();
+                        this.sendFireTrucks();
+                        this.bcms.route_for_fire_trucks();
+                        JavaOutils.getInstance().afficheMaConsole(maConsole,"Please confirm the route to continue\n");
+                        
                     }
                     catch(Statechart_exception ex)
                     {
@@ -102,10 +102,40 @@ public class FiremanController implements Initializable
                 });
     }
 
-    private void sendFireTrucks(int nbTruck) throws Statechart_exception
+    private void agreeOrNot(boolean isAgree) throws Statechart_exception
     {
-        this.bcms.state_fire_truck_number(nbTruck);
-            this.listFTruck.stream().limit(nbTruck).forEach(
+    	if (isAgree)
+    	{    
+    		this.bcms.FSC_agrees_about_fire_truck_route();
+    		this.dispatchedFireTrucks();
+            this.breakdownFireTrucks();
+            this.arrivedFireTruck();
+            this.bcms.close();
+    	}
+    	else
+    	{
+    		this.bcms.FSC_disagrees_about_fire_truck_route();
+    		this.bcms.route_for_fire_trucks();
+    		JavaOutils.getInstance().afficheMaConsole(maConsole,"Please confirm the new path to continue\n");
+    	}   
+    }
+    
+    @FXML
+    private void agreeTheRoad() throws Statechart_exception
+    { 
+    	agreeOrNot(true);
+    	disagreeButton.setDisable(true);
+    }
+    @FXML
+    private void disagreeTheRoad() throws Statechart_exception
+    {
+    	agreeOrNot(false);
+    }
+    
+    private void sendFireTrucks( ) throws Statechart_exception
+    {
+        this.bcms.state_fire_truck_number(this.nbFireTrucks);
+            this.listFTruck.stream().limit(this.nbFireTrucks).forEach(
                 elt ->
                 { 
                     JavaOutils.getInstance().afficheMaConsole(maConsole,"Idle " + elt);
@@ -115,37 +145,9 @@ public class FiremanController implements Initializable
 
     }
     
-     private void agreeOrNot(boolean isAgree) throws Statechart_exception
+    private void breakdownFireTrucks( )
     {
-        if (isAgree)
-        {    
-            this.bcms.route_for_fire_trucks();
-            this.bcms.FSC_agrees_about_fire_truck_route();      
-        }
-        else
-        {
-            this.bcms.route_for_fire_trucks();
-            this.bcms.FSC_disagrees_about_fire_truck_route();
-        }   
-    }
-    
-    @FXML
-    private void agreeTheRoad() throws Statechart_exception
-    { 
-        agreeOrNot(true); 
-    }
-    
-    private void disagreeTheRoad() throws Statechart_exception
-    {
-        agreeOrNot(false);
-    }
-    
-            
-            
-            
-    private void breakdownFireTrucks(int nbTruck)
-    {
-        this.listFTruck.stream().limit(nbTruck).forEach(
+        this.listFTruck.stream().limit(this.nbFireTrucks).forEach(
             elt ->
             {
                 try
@@ -161,11 +163,12 @@ public class FiremanController implements Initializable
                 }
             }
         );
+        JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
     }
     
-    private void dispatchedFireTrucks(int nbTruck)
+    private void dispatchedFireTrucks( )
     {
-         this.listFTruck.stream().limit(nbTruck).forEach(
+         this.listFTruck.stream().limit(this.nbFireTrucks).forEach(
             elt ->
             {
                 try
@@ -182,9 +185,9 @@ public class FiremanController implements Initializable
         JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
     }
     
-    private void arrivedFireTruck(int nbTruck) 
+    private void arrivedFireTruck() 
     {
-        this.listFTruck.stream().limit(nbTruck).forEach(
+        this.listFTruck.stream().limit(this.nbFireTrucks).forEach(
             elt ->
             {
                 try
