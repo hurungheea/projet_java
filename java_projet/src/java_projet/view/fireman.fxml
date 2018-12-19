@@ -13,7 +13,7 @@
   <children>
     <VBox layoutX="0.0" layoutY="0.0" padding="$x1" prefHeight="400.0" prefWidth="658.0" spacing="5.0">
       <children>
-        <Label fx:id="topLabel" prefHeight="30.999908447265625" prefWidth="647.9998779296875" text="Fireman">
+        <Label fx:id="topLabel" prefHeight="30.999908447265625" prefWidth="647.9998779296875" text="Fireman" styleClass="myLabels">
           <font>
             <Font name="DejaVu Sans Mono Bold" size="16.0" />
           </font>
@@ -22,7 +22,7 @@
           <children>
             <HBox prefHeight="21.0" prefWidth="628.0">
               <children>
-                <Label prefWidth="321.0" text="How many fire truck would you want to deploy ?">
+                <Label prefWidth="321.0" text="How many fire truck would you want to deploy ?" styleClass="myLabels">
                   <HBox.margin>
                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" fx:id="x1" />
                   </HBox.margin>
@@ -38,13 +38,13 @@
         </VBox>
         <HBox prefHeight="100.0" prefWidth="200.0" fx:id="choosenRoadLayout">
           <children>
-            <Label prefWidth="321.0" text="Do you agree with the choosen road ?" HBox.margin="$x1" />
+            <Label prefWidth="321.0" text="Do you agree with the choosen road ?" HBox.margin="$x1" styleClass="myLabels"/>
             <Button fx:id="agreeButton" mnemonicParsing="false" onMouseClicked="#agreeTheRoad" text="yes" HBox.margin="$x1">
               <font>
                 <Font name="DejaVu Sans Mono" size="13.0" fx:id="x2" />
               </font>
             </Button>
-            <Button fx:id="disagreeButton" font="$x2" mnemonicParsing="false" text="no" HBox.margin="$x1" />
+            <Button fx:id="disagreeButton" font="$x2" mnemonicParsing="false" onMouseClicked="#disagreeTheRoad" text="no" HBox.margin="$x1" />
           </children>
         </HBox>
         <HBox alignment="CENTER_RIGHT" prefHeight="185.0" prefWidth="628.0">

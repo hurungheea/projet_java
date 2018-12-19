@@ -19,10 +19,12 @@ import javafx.animation.TranslateTransition;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
@@ -59,21 +61,10 @@ public class ConnectionPageController implements Initializable
     public void initialize(URL url, ResourceBundle rb)
     {
     	this.logLayout.setVisible(false);
+    	logLayout.toFront();
     	ObservableList<String> obsLogList = FXCollections.observableArrayList(logValues);
     	selectLog.setItems(obsLogList);
-    	
-    	ReadOnlyObjectProperty<String> selectedItemProperty = selectLog.getSelectionModel().selectedItemProperty();
-        selectedItemProperty.addListener((obs,old,newValue) ->
-        {
-        	if(!newValue.equals("OFF"))
-        		GestionPF.setLogLevel(newValue);        		
-        });
-    }    
-    
-    @FXML
-    private void forceLogShow()
-    {
-    	this.selectLog.show();
+    	    	
     }
     
     @FXML
@@ -92,7 +83,7 @@ public class ConnectionPageController implements Initializable
     		translateLog.setNode(logLayout);
     		translateLog.setByY(43);
     		translateLog.play();
-    		selectLog.show();
+    		//selectLog.show();
     	}
     }
     

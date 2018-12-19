@@ -114,6 +114,8 @@ public class FiremanController implements Initializable
     {
     	if (isAgree)
     	{    
+    		this.disagreeButton.setDisable(true);
+    		this.agreeButton.setDisable(true);
     		this.bcms.FSC_agrees_about_fire_truck_route();
     		this.dispatchedFireTrucks();
             this.breakdownFireTrucks();

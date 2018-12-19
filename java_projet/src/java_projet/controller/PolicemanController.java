@@ -95,6 +95,8 @@ public class PolicemanController implements Initializable
     {
     	if (isAgree)
     	{    
+    		this.disagreeButton.setDisable(true);
+    		this.agreeButton.setDisable(true);
     		this.bcms.FSC_agrees_about_fire_truck_route();//PSC_agrees_about_fire_truck_route n'existe pas 
     		this.dispatchedPoliceTrucks();
             this.breakdownFireTrucks();

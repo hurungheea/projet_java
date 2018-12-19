@@ -12,14 +12,14 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="java_projet.controller.ConnectionPageController">
   <children>
-    <HBox fx:id="logLayout" alignment="CENTER" layoutX="0.0" layoutY="-45.0" prefHeight="45.0" prefWidth="600.0">
+    <HBox fx:id="logLayout" alignment="CENTER" cache="false" layoutX="0.0" layoutY="-45.0" opacity="1.0" prefHeight="45.0" prefWidth="600.0">
       <children>
         <Label fx:id="logLabel" alignment="CENTER" contentDisplay="CENTER" prefWidth="165.0" text="Log level :" textAlignment="CENTER" textFill="BLACK">
           <font>
-            <Font name="DejaVu Sans Mono" size="13.0" />
+            <Font name="DejaVu Sans Mono" size="13.0" fx:id="x2" />
           </font>
         </Label>
-        <ChoiceBox fx:id="selectLog" onMouseClicked="#forceLogShow">
+        <ChoiceBox fx:id="selectLog">
           <items>
             <FXCollections fx:factory="observableArrayList" />
           </items>
@@ -29,17 +29,14 @@
         </ChoiceBox>
       </children>
     </HBox>
-    <Label alignment="CENTER" layoutX="1.0" layoutY="0.0" prefHeight="104.0" prefWidth="600.0" text="Please select the squad you want to dispatch">
+    <Label alignment="CENTER" styleClass="myLabels" layoutX="1.0" layoutY="0.0" prefHeight="104.0" prefWidth="600.0" text="Please select the squad you want to dispatch">
       <font>
         <Font name="DejaVu Sans Mono Bold" size="16.0" />
       </font>
     </Label>
     <HBox alignment="CENTER" layoutX="1.0" layoutY="104.0" prefHeight="211.0" prefWidth="600.0">
       <children>
-        <Button fx:id="fmBtn" mnemonicParsing="false" onMouseClicked="#fireConnection" prefHeight="76.0" prefWidth="178.0" text="Fireman">
-          <font>
-            <Font name="DejaVu Sans Mono Bold" size="13.0" fx:id="x2" />
-          </font>
+        <Button fx:id="fmBtn" font="$x2" mnemonicParsing="false" onMouseClicked="#fireConnection" prefHeight="76.0" prefWidth="178.0" text="Fireman">
           <HBox.margin>
             <Insets left="50.0" right="50.0" fx:id="x1" />
           </HBox.margin>
@@ -54,7 +51,7 @@
     <HBox alignment="CENTER" layoutX="0.0" layoutY="315.0" prefHeight="85.0" prefWidth="600.0">
       <children>
         <Button font="$x2" mnemonicParsing="false" onMouseClicked="#quitApp" text="Quitter" textFill="$x3" />
-        <Label onMouseClicked="#displayLogLayout" text="Log setup">
+        <Label onMouseClicked="#displayLogLayout" styleClass="myLabels" text="Log setup">
           <HBox.margin>
             <Insets left="50.0" />
           </HBox.margin>

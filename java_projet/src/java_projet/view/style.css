@@ -38,13 +38,26 @@ and open the template in the editor.
 
 #logLayout
 {
-	-fx-background-color: #000B29;
-    -fx-text-fill: #292929 !important;
-    -fx-border-style: solid;
-    -fx-border-width: 2;
-    -fx-border-color: #EDB83D;
-    -fx-border-radius:0 0 25 25;
-    
+	-fx-background-color:#D70026;
+	-fx-background-radius: 0.0 0.0 20.0 20.0;
+}
+
+.choice_box > .items
+{
+	-fx-text-fill: #F8F5F2 !important;
+}
+
+#logLayout > .choice-box
+{
+	-fx-background-color:#bfbfbf;
+    -fx-border-color: #8c8c8c;
+    -fx-control-inner-background:#8c8c8c;
+    -fx-border-color: #F8F5F2;
+}
+
+#logLayout > .label
+{
+	-fx-text-fill: #F8F5F2 !important;
 }
 
 .button
@@ -53,7 +66,7 @@ and open the template in the editor.
     -fx-text-fill: #F8F5F2;
 }
 
-.label
+.myLabels
 {
     -fx-text-fill: #EDB83D;
 }
