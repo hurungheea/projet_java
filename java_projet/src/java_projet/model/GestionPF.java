@@ -15,11 +15,17 @@ import javafx.stage.Stage;
 import com.FranckBarbier.Java._BCMS.BCMS;
 import com.pauware.pauware_engine._Exception.Statechart_exception;
 import org.apache.log4j.BasicConfigurator;
+import org.apache.log4j.Level;
 
 public class GestionPF extends Application 
 {
+	private final static int MAIN_STAGE_WIDTH = 600;
+	private final static int MAIN_STAGE_HEIGHT = 400;
+	private final static int SQUAD_STAGE_WIDTH = 700;
+	private final static int SQUAD_STAGE_HEIGHT = 420;
+	
     private static BCMS bcms;
-        
+    public static Level logLevel = Level.OFF;
     private static Stage stage;
     private static Parent page;
     private static Scene scene;
@@ -29,8 +35,7 @@ public class GestionPF extends Application
         stage = new Stage();
         bcms = new BCMS();
         bcms.start();
-    }
-    
+    }    
     /**
      * @param stage
      * @throws Exception 
@@ -59,16 +64,33 @@ public class GestionPF extends Application
      * @param fxml
      * @throws IOException 
      */
-    public static final void changeScene(String fxml) throws IOException
+    public static final void changeScene(String fxml,boolean isTheConnexionPage) throws IOException
     {
         GestionPF.page = (Parent) FXMLLoader.load(GestionPF.class.getResource(fxml));
         
         GestionPF.scene = GestionPF.stage.getScene();
-        GestionPF.scene = new Scene(GestionPF.page,700,420);
+        if(isTheConnexionPage)
+        {
+        	GestionPF.scene = new Scene(GestionPF.page,MAIN_STAGE_WIDTH,MAIN_STAGE_HEIGHT);
+        }
+        else
+        {
+        	GestionPF.scene = new Scene(GestionPF.page,SQUAD_STAGE_WIDTH,SQUAD_STAGE_HEIGHT);
+        }
         GestionPF.scene.getStylesheets().add(GestionPF.class.getResource(JavaOutils.getInstance().file.get("style")).toExternalForm());
-        
         GestionPF.stage.setScene(GestionPF.scene);
         GestionPF.stage.show();
+    }
+    
+    public static void setLogLevel(String level)
+    {
+    	GestionPF.logLevel = Level.toLevel(level);
+    	JavaOutils.getInstance().logger.setLevel(GestionPF.getLogLevel());
+    }
+    
+    public static Level getLogLevel()
+    {
+    	return GestionPF.logLevel;
     }
     
     public static final BCMS getBcms()

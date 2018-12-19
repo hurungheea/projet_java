@@ -2,20 +2,20 @@
 
 <?import java.lang.*?>
 <?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
 <?import javafx.collections.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="658.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="java_projet.controller.FiremanController">
   <children>
     <VBox layoutX="0.0" layoutY="0.0" padding="$x1" prefHeight="400.0" prefWidth="658.0" spacing="5.0">
       <children>
-        <Label fx:id="topLabel" text="Fireman">
+        <Label fx:id="topLabel" prefHeight="30.999908447265625" prefWidth="647.9998779296875" text="Fireman">
           <font>
-            <Font name="DejaVu Sans ExtraLight" size="24.0" />
+            <Font name="DejaVu Sans Mono Bold" size="16.0" />
           </font>
         </Label>
         <VBox prefHeight="21.0" prefWidth="628.0">
@@ -36,11 +36,15 @@
             </HBox>
           </children>
         </VBox>
-        <HBox prefHeight="100.0" prefWidth="200.0">
+        <HBox prefHeight="100.0" prefWidth="200.0" fx:id="choosenRoadLayout">
           <children>
             <Label prefWidth="321.0" text="Do you agree with the choosen road ?" HBox.margin="$x1" />
-            <Button fx:id="agreeButton" mnemonicParsing="false" onMouseClicked="#agreeTheRoad" text="yes" HBox.margin="$x1" />
-            <Button fx:id="disagreeButton" mnemonicParsing="false" text="no" HBox.margin="$x1" />
+            <Button fx:id="agreeButton" mnemonicParsing="false" onMouseClicked="#agreeTheRoad" text="yes" HBox.margin="$x1">
+              <font>
+                <Font name="DejaVu Sans Mono" size="13.0" fx:id="x2" />
+              </font>
+            </Button>
+            <Button fx:id="disagreeButton" font="$x2" mnemonicParsing="false" text="no" HBox.margin="$x1" />
           </children>
         </HBox>
         <HBox alignment="CENTER_RIGHT" prefHeight="185.0" prefWidth="628.0">
@@ -54,8 +58,8 @@
         </HBox>
         <HBox alignment="CENTER" minHeight="68.0" opacity="1.0" prefHeight="68.0" prefWidth="628.0">
           <children>
-            <Button mnemonicParsing="false" onMouseClicked="#quitApp" text="Quitter" />
-            <Button fx:id="backBtn" mnemonicParsing="false" onMouseClicked="#backHome" prefHeight="76.0" prefWidth="178.0" text="Back to home page">
+            <Button font="$x2" mnemonicParsing="false" onMouseClicked="#quitApp" text="Quitter" />
+            <Button fx:id="backBtn" font="$x2" mnemonicParsing="false" onMouseClicked="#backHome" prefHeight="76.0" prefWidth="178.0" text="Back to home page" textAlignment="CENTER">
               <HBox.margin>
                 <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
               </HBox.margin>

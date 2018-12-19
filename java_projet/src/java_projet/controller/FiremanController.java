@@ -15,6 +15,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
+import org.apache.log4j.Layout;
+
 import java_projet.model.JavaOutils;
 import java_projet.model.GestionPF;
 import javafx.fxml.FXML;
@@ -22,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
@@ -39,6 +43,8 @@ public class FiremanController implements Initializable
     private int nbFireTrucks;
     private List<String> listFTruck;
     
+    @FXML
+    private HBox choosenRoadLayout;
     @FXML
     private Button backBtn;
     @FXML
@@ -77,6 +83,7 @@ public class FiremanController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+    	this.choosenRoadLayout.setDisable(true);
         maConsole.setEditable(false);
         for(int i=1;i<= this.listFTruck.size();i++)
         {
@@ -84,7 +91,7 @@ public class FiremanController implements Initializable
         }
                     
         ReadOnlyObjectProperty<String> selectedItemProperty = select.getSelectionModel().selectedItemProperty();
-                selectedItemProperty.addListener((obs,old,newValue) -> 
+                selectedItemProperty.addListener((obs,old,newValue) ->
                 {
                 	this.nbFireTrucks = Integer.parseInt(newValue);
                     select.setDisable(true);
@@ -99,6 +106,7 @@ public class FiremanController implements Initializable
                     {
                         JavaOutils.getInstance().logger.fatal(ex);
                     }
+                    this.choosenRoadLayout.setDisable(false);
                 });
     }
 
@@ -134,6 +142,7 @@ public class FiremanController implements Initializable
     
     private void sendFireTrucks( ) throws Statechart_exception
     {
+		this.bcms.FSC_connection_request();
         this.bcms.state_fire_truck_number(this.nbFireTrucks);
             this.listFTruck.stream().limit(this.nbFireTrucks).forEach(
                 elt ->
@@ -217,7 +226,7 @@ public class FiremanController implements Initializable
     private void backHome(MouseEvent event) throws IOException,Statechart_exception
     {
         this.bcms.close();
-        GestionPF.changeScene(JavaOutils.getInstance().file.get("connectionPage"));
+        GestionPF.changeScene(JavaOutils.getInstance().file.get("connectionPage"),true);
     }    
 
 }

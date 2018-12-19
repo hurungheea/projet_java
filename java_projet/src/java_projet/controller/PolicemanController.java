@@ -22,6 +22,7 @@ import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.beans.property.ReadOnlyObjectProperty;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TextArea;
@@ -36,7 +37,8 @@ public class PolicemanController implements Initializable
     private final BCMS bcms;
     private int nbPoliceTrucks;
     private final List<String> listPVehicles;
-    
+    @FXML
+    private HBox choosenRoadLayout;
     @FXML
     private Insets x1;
     @FXML
@@ -64,6 +66,7 @@ public class PolicemanController implements Initializable
     @Override
     public void initialize(URL url, ResourceBundle rb)
     {
+    	this.choosenRoadLayout.setDisable(true);
         maConsole.setEditable(false);
         for(int i=1;i<=this.listPVehicles.size();i++)
         {
@@ -84,6 +87,7 @@ public class PolicemanController implements Initializable
                     {
                         JavaOutils.getInstance().logger.fatal(ex);
                     }
+                    this.choosenRoadLayout.setDisable(false);
                 });
     }
     
@@ -91,7 +95,7 @@ public class PolicemanController implements Initializable
     {
     	if (isAgree)
     	{    
-    		this.bcms.FSC_agrees_about_fire_truck_route();
+    		this.bcms.FSC_agrees_about_fire_truck_route();//PSC_agrees_about_fire_truck_route n'existe pas 
     		this.dispatchedPoliceTrucks();
             this.breakdownFireTrucks();
             this.arrivedFireTruck();
@@ -99,7 +103,7 @@ public class PolicemanController implements Initializable
     	}
     	else
     	{
-    		this.bcms.FSC_disagrees_about_fire_truck_route();
+    		this.bcms.FSC_disagrees_about_fire_truck_route();//PSC_disagrees_about_fire_truck_route n'existe pas non plus
     		this.bcms.route_for_police_vehicles();
     		JavaOutils.getInstance().afficheMaConsole(maConsole,"Please confirm the new path to continue\n");
     	}   
@@ -119,7 +123,8 @@ public class PolicemanController implements Initializable
     
     private void sendPoliceTruck() throws Statechart_exception
     {
-     this.bcms.state_police_vehicle_number(this.nbPoliceTrucks);
+    	this.bcms.PSC_connection_request();
+    	this.bcms.state_police_vehicle_number(this.nbPoliceTrucks);
         this.listPVehicles.stream().limit(this.nbPoliceTrucks).forEach(
             elt ->
             { 
@@ -127,10 +132,6 @@ public class PolicemanController implements Initializable
                 JavaOutils.getInstance().logger.info("Idle " + elt);
             });
         JavaOutils.getInstance().afficheMaConsole(maConsole,"");//saute une ligne dans la console
-        this.bcms.route_for_police_vehicles();
-        this.bcms.FSC_disagrees_about_fire_truck_route();
-        this.bcms.route_for_police_vehicles();
-        this.bcms.FSC_agrees_about_fire_truck_route();
     }
     
     private void dispatchedPoliceTrucks() throws Statechart_exception
@@ -159,11 +160,12 @@ public class PolicemanController implements Initializable
         { 
             try
             {
+            	this.bcms.get_police_vehicles(BCMS.Status.Breakdown);
                 this.bcms.police_vehicle_breakdown(elt,"");
                 JavaOutils.getInstance().logger.info(BCMS.Status.Breakdown + ": " + elt);
                 JavaOutils.getInstance().afficheMaConsole(maConsole,BCMS.Status.Breakdown + ": " + elt);    
             }
-            catch(Statechart_exception ex)
+            catch(Statechart_exception | SQLException ex)
             {
                 JavaOutils.getInstance().logger.fatal(ex);
             }
@@ -187,7 +189,7 @@ public class PolicemanController implements Initializable
     private void backHome(MouseEvent event) throws IOException, Statechart_exception
     {
         this.bcms.close();
-        GestionPF.changeScene(JavaOutils.getInstance().file.get("connectionPage"));
+        GestionPF.changeScene(JavaOutils.getInstance().file.get("connectionPage"),true);
     }
 
     @FXML

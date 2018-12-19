@@ -31,15 +31,20 @@ and open the template in the editor.
     -fx-control-inner-background:#000B29;
 }
 
-#policeLabel
-{
-    -fx-background-color: #D70026;
-    -fx-text-fill: rgb(255,255,255);
-}
-
 .root
 {
     -fx-background-color: #000B29;
+}
+
+#logLayout
+{
+	-fx-background-color: #000B29;
+    -fx-text-fill: #292929 !important;
+    -fx-border-style: solid;
+    -fx-border-width: 2;
+    -fx-border-color: #EDB83D;
+    -fx-border-radius:0 0 25 25;
+    
 }
 
 .button
